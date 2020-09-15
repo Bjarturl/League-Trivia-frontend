@@ -10,4 +10,3 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port);
-// "start": "webpack-dev-server --config ./webpack.config.js --mode development",

@@ -13,6 +13,7 @@
 	},
 	"scripts": { 
 		"start": "node server.js",
+		"start-dev": "webpack-dev-server --config ./webpack.config.js --mode development",
 		"build": "webpack",
 		"heroku-prebuild": "npm install --dev",
 		"watch": "webpack --watch",

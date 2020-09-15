@@ -23,6 +23,10 @@ export const GET = {
     return API_URL + "question";
   },
 
+  getAnswer(id) {
+    return API_URL + "answer/" + id ;
+  },
+
   getPlayers(id) {
     if (id) {
       return API_URL + "players/" + id;

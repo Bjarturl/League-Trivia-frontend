@@ -30,28 +30,41 @@ class Quiz extends React.Component {
       });
   }
 
+
   evaluateAnswer(ans) {
     const { question } = this.state;
-    if (ans == question.answer.toString().split(",")[0]) {
-      this.setState({
-        points: this.state.points + 1,
-        isCorrect: true,
-        visibleAns: question.answer,
+      var answer = ""
+    GET.sendGetRequest(GET.getAnswer(question.ans_id)).then((data) => {
+         answer = data.answer
+      }).then(() => {
+        if (ans == answer.toString().split(",")[0]) {
+            this.setState({
+              points: this.state.points + 1,
+              isCorrect: true,
+              visibleAns: answer,
+            });
+          } else if(answer == "Hey, bannað að svindla! :(") {
+            this.setState({
+                points: 0,
+                isCorrect: null,
+                visibleAns: answer,
+              });
+          } else {
+              if(this.state.points > this.state.highscore) {
+                  this.setState({ highscore: this.state.points})
+                  cookies.set('highscore', this.state.points, { path: '/' });
+                  console.log(document.cookie);
+              }
+              this.setState({
+                  isCorrect: false,
+                  visibleAns: "Rétt svar er: " + answer.toString(),
+                  points: 0
+              })
+          }
+          
+          this.getQuestion()
       });
-    } else {
-        if(this.state.points > this.state.highscore) {
-            this.setState({ highscore: this.state.points})
-            cookies.set('highscore', this.state.points, { path: '/' });
-            console.log(document.cookie);
-        }
-        this.setState({
-            isCorrect: false,
-            visibleAns: "Rétt svar er: " + question.answer.toString(),
-            points: 0
-        })
-    }
-    
-    this.getQuestion()
+   
   }
 
   render() {
