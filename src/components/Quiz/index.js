@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { GET } from "../../services/api_calls";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 class Quiz extends React.Component {
   componentDidMount() {
     GET.sendGetRequest(GET.getRandomQuestion()).then((data) => {
@@ -20,59 +20,59 @@ class Quiz extends React.Component {
       points: 0,
       visibleAns: "",
       isCorrect: null,
-      highscore: cookies.get('highscore') ? cookies.get('highscore') : 0
+      highscore: cookies.get("highscore") ? cookies.get("highscore") : 0,
     };
   }
 
   getQuestion() {
     GET.sendGetRequest(GET.getRandomQuestion()).then((data) => {
-        this.setState({ question: data });
-      });
+      this.setState({ question: data });
+    });
   }
-
 
   evaluateAnswer(ans) {
     const { question } = this.state;
-      var answer = ""
-    GET.sendGetRequest(GET.getAnswer(question.ans_id)).then((data) => {
-         answer = data.answer
-      }).then(() => {
+    var answer = "";
+    GET.sendGetRequest(GET.getAnswer(question.ans_id))
+      .then((data) => {
+        answer = data.answer;
+      })
+      .then(() => {
+        const cookies = new Cookies();
         if (ans == answer.toString().split(",")[0]) {
-            this.setState({
-              points: this.state.points + 1,
-              isCorrect: true,
-              visibleAns: answer,
-            });
-          } else if(answer == "Hey, bannað að svindla! :(") {
-            this.setState({
-                points: 0,
-                isCorrect: null,
-                visibleAns: answer,
-              });
-          } else {
-              if(this.state.points > this.state.highscore) {
-                  this.setState({ highscore: this.state.points})
-                  cookies.set('highscore', this.state.points, { path: '/' });
-                  console.log(document.cookie);
-              }
-              this.setState({
-                  isCorrect: false,
-                  visibleAns: "Rétt svar er: " + answer.toString(),
-                  points: 0
-              })
+          this.setState({
+            points: this.state.points + 1,
+            isCorrect: true,
+            visibleAns: answer,
+          });
+        } else if (answer == "Hey, bannað að svindla! :(") {
+          this.setState({
+            points: 0,
+            isCorrect: null,
+            visibleAns: answer,
+          });
+        } else {
+          if (this.state.points > this.state.highscore) {
+            this.setState({ highscore: this.state.points });
+            cookies.set("highscore", this.state.points, { path: "/" });
           }
-          
-          this.getQuestion()
+          this.setState({
+            isCorrect: false,
+            visibleAns: "Rétt svar er: " + answer.toString(),
+            points: 0,
+          });
+        }
+
+        this.getQuestion();
       });
-   
   }
 
   render() {
     const { question } = this.state;
     return (
       <div>
-          <p>Hæsta skor: {this.state.highscore}</p>
-          <p>Stig: {this.state.points}</p>
+        <p>Hæsta skor: {this.state.highscore}</p>
+        <p>Stig: {this.state.points}</p>
         <div
           className="quiz"
           style={{
@@ -103,8 +103,18 @@ class Quiz extends React.Component {
           ))}
         </div>
         <div>
-          <h3 style={{color: this.state.isCorrect ? "green" : "red"}}><b>{this.state.isCorrect != null ? (this.state.isCorrect ? "Rétt :D" : "Rangt :("): ""}</b></h3>
-          <h3><b>{this.state.visibleAns}</b></h3>
+          <h3 style={{ color: this.state.isCorrect ? "green" : "red" }}>
+            <b>
+              {this.state.isCorrect != null
+                ? this.state.isCorrect
+                  ? "Rétt :D"
+                  : "Rangt :("
+                : ""}
+            </b>
+          </h3>
+          <h3>
+            <b>{this.state.visibleAns}</b>
+          </h3>
         </div>
       </div>
     );
