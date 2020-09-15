@@ -1,0 +1,12 @@
+{
+    "routes": [
+      {
+        "route": "/courses",
+        "allowedRoles": ["authenticated"]
+      },
+      {
+        "route": "/profile",
+        "allowedRoles": ["authenticated"]
+      }
+    ]
+  }

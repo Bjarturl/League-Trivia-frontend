@@ -1,0 +1,21 @@
+{
+  "routes": [
+    {
+      "route": "/courses:"
+    },
+    {
+      "route": "/courses/course=:course"
+    },
+    {
+      "route": "/courses/course=:course/topic=:topic"
+    },
+    {
+      "route": "/courses/course=:course/topic=:topic/resource=:resource"
+    },
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ]
+}

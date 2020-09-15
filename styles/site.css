@@ -1,0 +1,58 @@
+.hovering:hover {
+    opacity: 0.5 !important;
+}
+
+.nav-links {
+    padding-left: 0;
+}
+
+body {
+    font-size: 1.3em;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul.nav-links li {
+    display: inline-block;
+    padding-right: 30px;
+    font-size: 3em;
+}
+
+ul {
+    top: -10px;
+}
+
+.navbar {
+    background-color: rgb(112, 32, 26);
+}
+
+.nav-links img {
+    width: 60px;
+    height: 60px;
+}
+
+.container {
+    padding-top: 20px;
+    padding-bottom: 440px;
+    text-align: center;
+}
+
+.error {
+    color: red;
+}
+
+
+.navbar-btn:hover {
+    opacity: 0.5;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .navigation-link {
+        font-size: 0.7em;
+    }
+}
