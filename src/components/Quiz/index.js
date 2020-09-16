@@ -32,9 +32,11 @@ class Quiz extends React.Component {
     });
   }
 
-//   getNewQuestion() {
-//     POST.sendPostRequest(POST.getNewRandomQuestion(), JSON.stringify({answered: this.state.answered}))
-//   }
+  getNewQuestion() {
+    POST.sendPostRequest(POST.getNewRandomQuestion(), JSON.stringify({answered: this.state.answered})).then(data => {
+      this.setState({ question: data });
+    })
+  }
 
   submitHighScore() {
     POST.sendPostRequest(POST.submitHighScore(), JSON.stringify({highscore: this.state.points, name: this.state.name}))
@@ -44,7 +46,6 @@ class Quiz extends React.Component {
     const { question } = this.state;
     var answer = "";
     // this.submitHighScore()
-    // this.getNewQuestion();
 
     GET.sendGetRequest(GET.getAnswer(question.ans_id))
       .then((data) => {
@@ -57,7 +58,7 @@ class Quiz extends React.Component {
             points: this.state.points + 1,
             isCorrect: true,
             visibleAns: answer,
-            // answered: [...this.state.answered, this.state.question]
+            answered: [...this.state.answered, this.state.question.question]
           });
         } else if (answer == "Hey, bannað að svindla! :(") {
           this.setState({
@@ -78,8 +79,7 @@ class Quiz extends React.Component {
             answered: []
           });
         }
-
-        this.getQuestion();
+        this.getNewQuestion();
       });
   }
 
