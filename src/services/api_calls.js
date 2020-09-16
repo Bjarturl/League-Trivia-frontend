@@ -19,6 +19,10 @@ export const GET = {
     return API_URL + "teams";
   },
 
+  getSecretKey() {
+    return API_URL + "secret";
+  },
+
   getRandomQuestion() {
     return API_URL + "question";
   },
@@ -70,3 +74,29 @@ export const GET = {
   },
 
 };
+
+export const POST = {
+  async sendPostRequest(url, body) {
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: body
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      });
+  },
+  
+  submitHighScore() {
+    return API_URL + "add_high_score/"
+  },
+  
+  getNewRandomQuestion() {
+    return API_URL + "new_question";
+  },
+
+}
