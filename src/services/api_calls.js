@@ -66,6 +66,10 @@ export const GET = {
     return API_URL + "gameStats";
   },
 
+  getHighScores() {
+    return API_URL + "get_high_scores";
+  },
+
   getGames(id) {
     if (id) {
       return API_URL + "games/" + id;

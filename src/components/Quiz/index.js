@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import HighScores from "../HighScores";
 import { GET, POST } from "../../services/api_calls";
 import Cookies from "universal-cookie";
 class Quiz extends React.Component {
@@ -19,7 +20,7 @@ class Quiz extends React.Component {
       },
       answered: [],
       points: 0,
-      name: "Bjartur",
+      name: "",
       visibleAns: "",
       isCorrect: null,
       highscore: cookies.get("highscore") ? cookies.get("highscore") : 0,
@@ -38,14 +39,15 @@ class Quiz extends React.Component {
     })
   }
 
-  submitHighScore() {
-    POST.sendPostRequest(POST.submitHighScore(), JSON.stringify({highscore: this.state.points, name: this.state.name}))
+  submitHighScore(points) {
+    GET.sendGetRequest(GET.getSecretKey()).then((data) => {
+        POST.sendPostRequest(POST.submitHighScore(), JSON.stringify({highscore: points, name: this.state.name, secret: data.secret}))
+      });
   }
 
   evaluateAnswer(ans) {
     const { question } = this.state;
     var answer = "";
-    // this.submitHighScore()
 
     GET.sendGetRequest(GET.getAnswer(question.ans_id))
       .then((data) => {
@@ -72,9 +74,15 @@ class Quiz extends React.Component {
             this.setState({ highscore: this.state.points });
             cookies.set("highscore", this.state.points, { path: "/" });
           }
+          if(confirm("Þú tapaðir:( \n" + "Rétt svar er: " + answer.toString() + "\nÞú ert með " + this.state.points.toString() + " stig. \nViltu skrá þig á high score listann?")) {
+              var name = prompt("Skrifaðu nafnið þitt: ")
+              console.log(name);
+              if(name) {
+                  this.setState({ name: name})
+                  this.submitHighScore(this.state.points)
+              }
+          }
           this.setState({
-            isCorrect: false,
-            visibleAns: "Rétt svar er: " + answer.toString(),
             points: 0,
             answered: []
           });
@@ -131,6 +139,7 @@ class Quiz extends React.Component {
           <h3>
             <b>{this.state.visibleAns}</b>
           </h3>
+          <HighScores points={this.state.points}/>
         </div>
       </div>
     );
