@@ -8,13 +8,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-          <NavigationBar />
+        <h1>Maintenance í gangi</h1>
+          {/* <NavigationBar />
           <Container>
             <Switch>
-              {/* <Route exact path="/" render={() => <Home />} exact /> */}
               <Route exact path="/" render={() => <Quiz />} exact />
             </Switch>
-          </Container>
+          </Container> */}
       </div>
     );
   }
