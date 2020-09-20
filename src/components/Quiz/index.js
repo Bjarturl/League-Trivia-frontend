@@ -10,7 +10,7 @@ class Quiz extends React.Component {
     GET.sendGetRequest(GET.getRandomQuestion()).then((data) => {
       this.setState({
         question: data,
-        show: this.state.name == "" && !this.state.promptName,
+        show: this.state.name == "",
       });
     });
   }
@@ -26,7 +26,6 @@ class Quiz extends React.Component {
       answered: [],
       points: 0,
       name: cookies.get("name") ? cookies.get("name") : "",
-      promptName: false,
       wait: false,
       visibleAns: "",
       correct: null,
