@@ -95,7 +95,7 @@ class Quiz extends React.Component {
             answered: [],
           });
         } else {
-          timeout = 2500;
+          timeout = 3000;
           if (this.state.points > this.state.highscore) {
             this.setState({ highscore: this.state.points });
             cookies.set("highscore", this.state.points, { path: "/" });
@@ -174,8 +174,12 @@ class Quiz extends React.Component {
           ))}
         </div>
         <div>
-        <strong style={{fontSize: "0.7em", fontStyle: "italic", textAlign: "right",display: "flex",justifyContent: "flex-end", width: "100%"}}>
-          Spurningar eru úr vikum 1-2 í LoL móti Vodafone deildarinnar haustið 2020. <br />Uppfært í hverri viku.</strong>
+          <div style={{fontSize: "0.7em", fontStyle: "italic", textAlign: "right",display: "flex",justifyContent: "flex-end", width: "100%"}}>
+          <strong >
+            Spurningar eru úr vikum 1-2 í LoL móti Vodafone deildarinnar haustið 2020. <br />
+            Uppfært í hverri viku.</strong>
+
+          </div>
           <HighScores points={this.state.points} />
 
           <Modal //Form popup window
@@ -208,6 +212,11 @@ class Quiz extends React.Component {
             </div>
           </Modal>
         </div>
+        <br />
+        <br />
+        <br />
+        <strong>Spurningar? Tillögur? Fannstu bug? Sendu mér <a style={{color: "blue"}} href="mailto:hollirhafrar@gmail.com">tölvupóst</a>!</strong>
+
       </div>
     );
   }
