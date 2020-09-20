@@ -44,7 +44,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.less', '.css']
     },
     plugins: [
-        new HtmlWebpackPlugin({ title: 'Líg Trivia', favicon: "./public/nunu.png", template: './index.html', inject: 'body' })
+        new HtmlWebpackPlugin({ title: 'Vodafone deildin - LoL Trivia', favicon: "./public/nunu.png", template: './index.html', inject: 'body' })
     ],
     devServer: {
         open: true,
