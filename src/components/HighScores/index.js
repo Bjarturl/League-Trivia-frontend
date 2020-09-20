@@ -24,7 +24,7 @@ class HighScores extends React.Component {
     super();
     this.state = {
         highScores: [],
-        updated: false
+        updated: false,
     };
   }
 
@@ -32,7 +32,7 @@ class HighScores extends React.Component {
       const { highScores } = this.state;
     return (
       <div style={{ marginTop: "10%" }}>
-          <h1>Top 10</h1>
+          <h1>Topp 10</h1>
         <table style={{ width: "100%" }}>
           <thead>
             <tr style={{ fontSize: "1.5em", borderBottom: "1px solid black" }}>

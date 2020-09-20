@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 export const Input = ({ value, onInput, type, errorMessage, label, name, htmlId }) => (
   <div className="form-group">
     {label ? (
-      <label htmlFor={htmlId} className="control-label">
+      <label htmlFor={htmlId} className="control-label" style={{fontSize: "1.1em"}}>
         {label}
       </label>
     ) : (

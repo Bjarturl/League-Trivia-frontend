@@ -8,13 +8,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <h1>Maintenance í gangi</h1>
-          {/* <NavigationBar />
+          <NavigationBar />
           <Container>
             <Switch>
               <Route exact path="/" render={() => <Quiz />} exact />
             </Switch>
-          </Container> */}
+          </Container>
       </div>
     );
   }
