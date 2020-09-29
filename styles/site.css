@@ -1,0 +1,98 @@
+.hovering:hover {
+    opacity: 0.8 !important;
+}
+
+.nav-links {
+    padding-left: 0;
+}
+
+body {
+    font-size: 1.3em;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.link {
+    color: blue;
+    font-style: "italic";
+    font-size: 0.7em;
+    display: flex;
+    align-self: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+ul.nav-links li {
+    display: inline-block;
+    padding-right: 30px;
+    font-size: 3em;
+}
+
+ul {
+    top: -10px;
+}
+
+.navbar {
+    background-color: rgb(27, 14, 13);
+}
+
+.nav-links img {
+    width: 60px;
+    height: 60px;
+}
+
+.container {
+    padding-top: 20px;
+    padding-bottom: 440px;
+    text-align: center;
+}
+
+.error {
+    color: red;
+}
+
+.quiz {
+    background-image: url('https://www.visir.is/i/7ECB25589BC3BF8C726748B99F1950FCE9C57F83DE12D5E0A9D56857858B8034_713x0.jpg');
+    background-repeat: repeat;
+    background-size: 350px;
+    
+}
+
+.navbar-btn:hover {
+    opacity: 0.5;
+}
+
+
+.modal-container {
+    background-color: aliceblue;
+    border: 2px solid black;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+}
+
+.modal-close-cont {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-close {
+    margin: 10px;
+    font-size: 1.4em;
+    width: 10%;
+}
+
+.modal-close:hover {
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .navigation-link {
+        font-size: 0.7em;
+    }
+}
