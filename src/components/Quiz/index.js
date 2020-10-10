@@ -291,7 +291,7 @@ class Quiz extends React.Component {
         <strong>
           Spurningar? Tillögur? Fannstu bug? Sendu mér{" "}
           <a style={{ color: "blue" }} href="mailto:hollirhafrar@gmail.com">
-            tölvupóst
+            línu
           </a>
           !
         </strong>
