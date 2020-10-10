@@ -176,7 +176,7 @@ class Quiz extends React.Component {
         <div>
           <div style={{fontSize: "0.7em", fontStyle: "italic", textAlign: "right",display: "flex",justifyContent: "flex-end", width: "100%"}}>
           <strong >
-            Spurningar eru úr vikum 1-2 í LoL móti Vodafone deildarinnar haustið 2020. <br />
+            Spurningar eru úr vikum 1-5 í LoL móti Vodafone deildarinnar haustið 2020. <br />
             Uppfært í hverri viku.</strong>
 
           </div>
