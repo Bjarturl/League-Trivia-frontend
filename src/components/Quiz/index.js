@@ -58,11 +58,19 @@ class Quiz extends React.Component {
           name: this.state.name,
           secret: data.secret,
         })
-      ).then(res => {
-        if(res.scored) {
-          this.setState({visibleAns: "Þú tapaðir en komst í topp 10. Til hamingju "  + this.state.name + "!"})
+      ).then((res) => {
+        if (res.scored) {
+          this.setState({
+            visibleAns:
+              "Þú tapaðir en komst í topp 10. Til hamingju " +
+              this.state.name +
+              "!",
+          });
         } else {
-          this.setState({visibleAns: "Þú tapaðir! Því miður var skorið þitt ekki nógu hátt til að komast í topp 10. Horfðu á nokkra leiki hjá SiggoTV og reyndu svo aftur."})
+          this.setState({
+            visibleAns:
+              "Þú tapaðir! Því miður var skorið þitt ekki nógu hátt til að komast í topp 10. Horfðu á nokkra leiki hjá SiggoTV og reyndu svo aftur.",
+          });
         }
       });
     });
@@ -73,14 +81,16 @@ class Quiz extends React.Component {
     const cookies = new Cookies();
     var answer = "";
     var timeout = 1500;
-    if(this.state.wait) { return;}
+    if (this.state.wait) {
+      return;
+    }
     GET.sendGetRequest(GET.getAnswer(question.ans_id))
       .then((data) => {
         answer = data.answer;
       })
       .then(() => {
-        this.setState({clicked: i})
-        
+        this.setState({ clicked: i });
+
         if (ans == answer.toString().split(",")[0]) {
           this.setState({
             points: this.state.points + 1,
@@ -100,24 +110,29 @@ class Quiz extends React.Component {
             this.setState({ highscore: this.state.points });
             cookies.set("highscore", this.state.points, { path: "/" });
           }
-            if (this.state.name != "") {
-              this.submitHighScore(this.state.points);
-            }
+          if (this.state.name != "") {
+            this.submitHighScore(this.state.points);
+          }
           this.setState({
             points: 0,
             answered: [],
           });
         }
-        this.setWait(timeout)
+        this.setWait(timeout);
       });
   }
 
   setWait(timeout) {
-    if(!this.state.wait) {
-      this.setState({wait: true})
-      setTimeout(() => { 
-        this.setState({wait: false, clicked: null, correct: null, visibleAns: ""});
-        this.getNewQuestion(); 
+    if (!this.state.wait) {
+      this.setState({ wait: true });
+      setTimeout(() => {
+        this.setState({
+          wait: false,
+          clicked: null,
+          correct: null,
+          visibleAns: "",
+        });
+        this.getNewQuestion();
       }, timeout);
     }
   }
@@ -134,11 +149,29 @@ class Quiz extends React.Component {
     const cookies = new Cookies();
     return (
       <div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-         <h3>Velkomin/nn {this.state.name ? <>{this.state.name}</>: <></>}! </h3>
-            <a className="link" onClick={() => {this.setState({show: true})}}> Breyta um nafn</a>
-          </div>
-        {this.state.name ? <></>: <><strong style={{fontSize: "0.7em"}}>ATH. nafn verður að vera til staðar til að skrá high score.</strong></>}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <h3>
+            Velkomin/nn {this.state.name ? <>{this.state.name}</> : <></>}!{" "}
+          </h3>
+          <a
+            className="link"
+            onClick={() => {
+              this.setState({ show: true });
+            }}
+          >
+            {" "}
+            Breyta um nafn
+          </a>
+        </div>
+        {this.state.name ? (
+          <></>
+        ) : (
+          <>
+            <strong style={{ fontSize: "0.7em" }}>
+              ATH. nafn verður að vera til staðar til að skrá high score.
+            </strong>
+          </>
+        )}
         <p>Hæsta skor: {this.state.highscore}</p>
         <p>Stig: {this.state.points}</p>
         <div
@@ -150,10 +183,30 @@ class Quiz extends React.Component {
             alignItems: "center",
           }}
         >
+          {!question.question ? (
+            <div>
+              <p style={{ color: "white", textShadow: "h-shadow" }}>
+                <strong>Sæki gögn</strong>
+                <div className="loader" style={{marginLeft: "20%"}}></div>
+              </p>
+            </div>
+          ) : (
+            <></>
+          )}
           <p style={{ color: "white", textShadow: "h-shadow" }}>
             <strong>{question.question}</strong>
           </p>
-          <p><b style={{color: "white", backgroundColor: "blue", textShadow: "h-shadow"}}>{this.state.visibleAns}</b></p>
+          <p>
+            <b
+              style={{
+                color: "white",
+                backgroundColor: "blue",
+                textShadow: "h-shadow",
+              }}
+            >
+              {this.state.visibleAns}
+            </b>
+          </p>
           {question.possibilities.map((p, i) => (
             <div
               key={i}
@@ -165,7 +218,12 @@ class Quiz extends React.Component {
                 margin: "20px",
                 height: "40px",
                 width: "60%",
-                backgroundColor: this.state.clicked == i ? (this.state.correct == i ? "green" : "red") : "lightyellow",
+                backgroundColor:
+                  this.state.clicked == i
+                    ? this.state.correct == i
+                      ? "green"
+                      : "red"
+                    : "lightyellow",
                 opacity: "0.9",
               }}
             >
@@ -174,11 +232,21 @@ class Quiz extends React.Component {
           ))}
         </div>
         <div>
-          <div style={{fontSize: "0.7em", fontStyle: "italic", textAlign: "right",display: "flex",justifyContent: "flex-end", width: "100%"}}>
-          <strong >
-            Spurningar eru úr vikum 1-5 í LoL móti Vodafone deildarinnar haustið 2020. <br />
-            Uppfært í hverri viku.</strong>
-
+          <div
+            style={{
+              fontSize: "0.7em",
+              fontStyle: "italic",
+              textAlign: "right",
+              display: "flex",
+              justifyContent: "flex-end",
+              width: "100%",
+            }}
+          >
+            <strong>
+              Spurningar eru úr vikum 1-5 í LoL móti Vodafone deildarinnar
+              haustið 2020. <br />
+              Uppfært í hverri viku.
+            </strong>
           </div>
           <HighScores points={this.state.points} />
 
@@ -204,19 +272,29 @@ class Quiz extends React.Component {
                 onClick={() => {
                   this.setState({ show: false });
                   cookies.set("name", this.state.name, { path: "/" });
-
                 }}
               >
                 <b>Byrja</b>
               </button>
             </div>
+            <span
+              style={{ fontSize: "12px", fontStyle: "italic", width: "100%" }}
+            >
+              Nafn er aðeins nauðsynlegt ef þú vilt eiga möguleika á að komast á
+              Topp 10 listann
+            </span>
           </Modal>
         </div>
         <br />
         <br />
         <br />
-        <strong>Spurningar? Tillögur? Fannstu bug? Sendu mér <a style={{color: "blue"}} href="mailto:hollirhafrar@gmail.com">tölvupóst</a>!</strong>
-
+        <strong>
+          Spurningar? Tillögur? Fannstu bug? Sendu mér{" "}
+          <a style={{ color: "blue" }} href="mailto:hollirhafrar@gmail.com">
+            tölvupóst
+          </a>
+          !
+        </strong>
       </div>
     );
   }
