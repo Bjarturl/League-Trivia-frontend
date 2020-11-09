@@ -243,7 +243,7 @@ class Quiz extends React.Component {
             }}
           >
             <strong>
-              Spurningar eru úr vikum 1-5 í LoL móti Vodafone deildarinnar
+              Spurningar eru úr allri seríu 4 í LoL móti Vodafone deildarinnar
               haustið 2020. <br />
               Uppfært í hverri viku.
             </strong>
